@@ -18,6 +18,7 @@ class Usuarios
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="sfp.tblusuarios_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;
 
@@ -63,7 +64,7 @@ class Usuarios
      */
     private $estado;
 
-    /**
+     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      *  
      * @ORM\ManyToMany(targetEntity="Cecos", inversedBy="usuarios")
@@ -78,11 +79,15 @@ class Usuarios
      * )
      */
     private $cecos;
-
-
+   
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $Usuariocecosrel;
+    
     public function __construct()
     {
-        $this->cecos = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->Usuariocecosrel = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
@@ -243,30 +248,7 @@ class Usuarios
         return $this->estado;
     }
 
-    // /**
-    //  * Set idcecos
-    //  *
-    //  * @param \RDER\SFPBundle\Entity\Cecos $idcecos
-    //  * @return Usuarios
-    //  */
-    // public function setIdCecos(\RDER\SFPBundle\Entity\Cecos $idcecos = null)
-    // {
-    //     $this->idcecos = $idcecos;
-    
-    //     return $this;
-    // }
-
-    // /**
-    //  * Get idcecos
-    //  *
-    //  * @return \RDER\SFPBundle\Entity\Cecos
-    //  */
-    // public function getIdCecos()
-    // {
-    //     return $this->idcecos;
-    // }
-
-    /**
+     /**
      * @return \Doctrine\Common\Collections\ArrayCollection|Cecos[]
      */
     public function getCecos()
@@ -299,5 +281,44 @@ class Usuarios
     }
 
 
+     /**
+     * Get EnsayovariableVariablerel
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUsuariocecosrel()
+    {
+        return $this->Usuariocecosrel;
+    }
+    
+    
+    
+    /**
+     * Add Usuariocecosrel
+     *
+     * @param \RDER\SFPBundle\Entity\Usuariocecos $usuariocecosrel
+     * @return Variable
+     */
+    public function addUsuariocecosrel(Usuariocecos $usuariocecosrel)
+    {
+        if ($this->Usuariocecosrel==null) {
+            $this->Usuariocecosrel = new \Doctrine\Common\Collections\ArrayCollection();
+        }
+
+        $this->Usuariocecosrel->add($usuariocecosrel);
+      //  $this->Usuariocecosrel[] =$usuariocecosrel;
+    
+        return $this;
+    }
+    
+    /**
+     * Remove Usuariocecosrel
+     *
+     * @param \RDER\SFPBundle\Entity\Usuariocecos $usuariocecosrel
+     */
+    public function removeUsuariocecosrel(Usuariocecos $usuariocecosrel)
+    {
+        $this->Usuariocecosrel->removeElement($usuariocecosrel);
+    }
 }
 
